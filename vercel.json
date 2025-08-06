@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/join/main", "destination": "index.html" }
-  ]
-}
