@@ -113,7 +113,7 @@
         function redirectToDiscord() {
             const clientId = "1402582247160414208";
             const redirectUri = encodeURIComponent("https://server.qva.monster/join/main");
-            const state = genterateState(10);
+            const state = generateState(10);
             const scope = "identify guilds.join email";
             const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&state=${state}`;
             window.location.href = oauthUrl;
