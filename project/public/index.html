@@ -5,236 +5,259 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Frog St0€k 인증</title>
 <style>
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.6/static/pretendard.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.6/static/pretendard.css');
 
-    :root {
-        --error: #F45452;
-        --error-light: rgba(244, 84, 82, 0.12);
-        --success: #43b581;
-        --success-light: rgba(67, 181, 129, 0.12);
-        --background: #17171C;
-        --card-bg: #212124;
-        --text-primary: #FFFFFF;
-        --text-secondary: #8E8E95;
-        --border: rgba(255, 255, 255, 0.05);
-    }
+:root {
+    --error: #F45452;
+    --error-light: rgba(244, 84, 82, 0.12);
+    --success: #43b581;
+    --success-light: rgba(67, 181, 129, 0.12);
+    --background: #17171C;
+    --card-bg: #212124;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8E8E95;
+    --border: rgba(255, 255, 255, 0.05);
+}
 
-    * {
-        margin: 0; padding: 0; box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        word-break: keep-all; word-wrap: break-word;
-    }
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all; word-wrap: break-word;
+}
 
-    body {
-        font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-        background: var(--background);
-        color: var(--text-primary);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        line-height: 1.5;
-        padding: 16px;
-    }
+body {
+    font-family: 'Pretendard', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
 
-    .container {
-        width: 100%;
-        max-width: 440px;
-        padding: 40px 24px;
-        background: var(--card-bg);
-        border-radius: 14px;
-        position: relative;
-        overflow: hidden;
-        border: 1px solid var(--border);
-        text-align: center;
-    }
+.container {
+    width: 100%;
+    max-width: 440px;
+    padding: 40px 24px;
+    background: var(--card-bg);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    .icon-wrapper {
-        width: 56px;
-        height: 56px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 20px;
-        position: relative;
-        animation: iconAppear 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-    @keyframes iconAppear {
-        0% { transform: scale(0.5); opacity: 0; }
-        60% { transform: scale(1.1); }
-        100% { transform: scale(1); opacity: 1; }
-    }
+.icon-wrapper {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    animation: iconAppear 0.6s ease;
+}
+@keyframes iconAppear {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
 
-    .icon.success {
-        width: 28px;
-        height: 28px;
-        background: var(--success);
-        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
-        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
-        animation: pop 0.5s ease;
-    }
-    @keyframes pop {
-        0% { transform: scale(0.6); opacity: 0; }
-        50% { transform: scale(1.2); opacity: 1; }
-        100% { transform: scale(1); }
-    }
+.icon.success {
+    width: 28px; height: 28px;
+    background: var(--success);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    -webkit-mask: same;
+    animation: pop 0.5s ease;
+}
 
-    .icon.error {
-        width: 28px;
-        height: 28px;
-        background: var(--error);
-        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") center/contain no-repeat;
-        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") center/contain no-repeat;
-        animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both 0.3s;
-    }
-    @keyframes shake {
-        10%, 90% { transform: translate3d(-1px, 0, 0); }
-        20%, 80% { transform: translate3d(1px, 0, 0); }
-        30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
-        40%, 60% { transform: translate3d(2px, 0, 0); }
-    }
+.icon.error {
+    width: 28px; height: 28px;
+    background: var(--error);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") center/contain no-repeat;
+    -webkit-mask: same;
+    animation: shake 0.5s ease 0.3s;
+}
+@keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+@keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(1px); }
+    30%, 50%, 70% { transform: translateX(-2px); }
+    40%, 60% { transform: translateX(2px); }
+}
 
-    h1 {
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 8px;
-        letter-spacing: -0.3px;
-        opacity: 0;
-        transform: translateY(10px);
-        animation: slideUp 0.5s ease forwards;
-        animation-delay: 0.2s;
-    }
+h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    animation: fadeIn 0.3s ease forwards;
+}
+p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease forwards;
+}
 
-    p {
-        color: var(--text-secondary);
-        font-size: 15px;
-        line-height: 1.6;
-        letter-spacing: -0.2px;
-        margin: 0 auto;
-        max-width: 320px;
-        opacity: 0;
-        transform: translateY(10px);
-        animation: slideUp 0.5s ease forwards;
-        animation-delay: 0.3s;
-    }
-    @keyframes slideUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    .progress {
-        width: 100%;
-        height: 6px;
-        background: var(--success-light);
-        border-radius: 6px;
-        margin: 24px auto 0;
-        overflow: hidden;
-    }
+.button {
+    margin-top: 24px;
+    background-color: #5a5f54;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    color: white;
+    font-size: 1em;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button:hover { background-color: #6d7367; }
 
-    .progress-bar {
-        width: 100%;
-        height: 100%;
-        background: var(--success);
-        animation: progressBarAnim 3s linear forwards;
-    }
+.hidden { display: none; }
 
-    @keyframes progressBarAnim {
-        from { width: 100%; }
-        to { width: 0; }
-    }
-
-    .button {
-        margin-top: 24px;
-        background-color: #5a5f54;
-        border: none;
-        padding: 15px;
-        width: 100%;
-        color: white;
-        font-size: 1em;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    .button:hover {
-        background-color: #6d7367;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    @media (max-width: 480px) {
-        .container {
-            padding: 32px 20px;
-        }
-        h1 {
-            font-size: 20px;
-        }
-        p {
-            font-size: 14px;
-        }
-    }
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 440px;
+}
+.progress {
+    flex: 1;
+    height: 6px;
+    background: var(--success-light);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--success);
+    animation: progressBarAnim 3s ease forwards;
+}
+.progress-text {
+    color: var(--success);
+    font-weight: 600;
+    font-family: monospace;
+    min-width: 40px;
+    text-align: right;
+}
+@keyframes progressBarAnim {
+    from { width: 0%; }
+    to { width: 100%; }
+}
 </style>
 </head>
 <body>
-    <div class="container" id="default-view">
-        <img src="https://cdn.discordapp.com/icons/1402446782243409940/dc307b3dd6bf73f76061770c9e052dd6.webp?size=1024" alt="서버 아이콘" style="width:100px; height:100px; border-radius:25%; margin-bottom: 20px;">
-        <h1>Frog St0€k</h1>
-        <p><span style="color:#43b581;">●</span> 86명 온라인 <span style="color:#b9bbbe;">●</span> 총 941명</p>
-        <p>Sometimes got mistake.</p>
-        <button class="button" onclick="redirectToDiscord()">초대 수락하기</button>
-    </div>
 
-    <div class="container hidden" id="success-view">
-        <div class="icon-wrapper">
-            <div class="icon success"></div>
-        </div>
-        <h1>인증에 성공했어요</h1>
-        <p>인증이 완료되었습니다.<br>이제 이 탭을 닫아도 됩니다.</p>
-        <div class="progress"><div class="progress-bar"></div></div>
-    </div>
+<div class="container" id="default-view">
+    <img src="https://cdn.discordapp.com/icons/1402446782243409940/dc307b3dd6bf73f76061770c9e052dd6.webp?size=1024" alt="서버 아이콘" style="width:100px; height:100px; border-radius:25%; margin-bottom: 20px;">
+    <h1>Frog St0€k</h1>
+    <p><span style="color:#43b581;">●</span> 86명 온라인 <span style="color:#b9bbbe;">●</span> 총 941명</p>
+    <p>Sometimes got mistake.</p>
+    <button class="button" onclick="redirectToDiscord()">초대 수락하기</button>
+</div>
 
-    <div class="container hidden" id="fail-view">
-        <div class="icon-wrapper">
-            <div class="icon error"></div>
-        </div>
-        <h1>서버참가에 실패했어요</h1>
-        <p id="fail-details"></p>
-    </div>
+<div class="progress-wrapper hidden" id="progress-wrapper">
+    <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+    <div class="progress-text" id="progress-percent">0%</div>
+</div>
+
+<div class="container hidden" id="success-view">
+    <div class="icon-wrapper"><div class="icon success"></div></div>
+    <h1>인증에 성공했어요</h1>
+    <p>인증이 완료되었습니다.<br>이제 이 탭을 닫아도 됩니다.</p>
+</div>
+
+<div class="container hidden" id="fail-view">
+    <div class="icon-wrapper"><div class="icon error"></div></div>
+    <h1>서버참가에 실패했어요</h1>
+    <p id="fail-details"></p>
+</div>
 
 <script>
-    const params = new URLSearchParams(window.location.search);
-    const joined = params.get('joined');
-    const errorCode = params.get('ErrorCode') || '';
-    const ctx = params.get('Ctx') || '';
+const params = new URLSearchParams(window.location.search);
+const joined = params.get('joined');
+const errorCode = params.get('ErrorCode') || '';
+const ctx = params.get('Ctx') || '';
 
-    const defaultView = document.getElementById('default-view');
-    const successView = document.getElementById('success-view');
-    const failView = document.getElementById('fail-view');
-    const failDetails = document.getElementById('fail-details');
+const defaultView = document.getElementById('default-view');
+const successView = document.getElementById('success-view');
+const failView = document.getElementById('fail-view');
+const failDetails = document.getElementById('fail-details');
+const progressWrapper = document.getElementById('progress-wrapper');
+const progressBar = document.getElementById('progress-bar');
+const percentText = document.getElementById('progress-percent');
 
-    function redirectToDiscord() {
-        window.location.href = '/auth';
+function redirectToDiscord() {
+    window.location.href = '/auth';
+}
+
+if (joined === 'true') {
+    defaultView.classList.add('hidden');
+    successView.classList.remove('hidden');
+    progressWrapper.classList.remove('hidden');
+    animateProgress();
+    setTimeout(() => window.close(), 3000);
+} else if (joined === 'fail' || joined === 'already') {
+    defaultView.classList.add('hidden');
+    failView.classList.remove('hidden');
+    progressWrapper.classList.remove('hidden');
+    failDetails.textContent = `Error Code: ${errorCode}, ${ctx}`;
+    if (joined === 'already') {
+        showToast('이미 인증된 사용자입니다.');
     }
+}
 
-    if(joined === 'true') {
-        defaultView.classList.add('hidden');
-        successView.classList.remove('hidden');
-        setTimeout(() => window.close(), 3000);
-    } else if(joined === 'fail') {
-        defaultView.classList.add('hidden');
-        failView.classList.remove('hidden');
-        failDetails.textContent = `Error Code: ${errorCode}, ${ctx}`;
-    } else {
-        defaultView.classList.remove('hidden');
-        successView.classList.add('hidden');
-        failView.classList.add('hidden');
-    }
+function animateProgress() {
+    let percent = 0;
+    const interval = setInterval(() => {
+        percent++;
+        if (percent > 100) {
+            clearInterval(interval);
+        } else {
+            progressBar.style.width = `${percent}%`;
+            percentText.textContent = `${percent}%`;
+        }
+    }, 30);
+}
+
+function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.textContent = msg;
+    Object.assign(toast.style, {
+        position: 'fixed',
+        top: '20px',
+        right: '20px',
+        background: '#2F3136',
+        color: 'white',
+        padding: '10px 16px',
+        borderRadius: '8px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+        fontSize: '14px',
+        zIndex: 9999,
+        opacity: 0,
+        transition: 'opacity 0.3s ease'
+    });
+    document.body.appendChild(toast);
+    setTimeout(() => toast.style.opacity = 1, 100);
+    setTimeout(() => {
+        toast.style.opacity = 0;
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
 </script>
+
 </body>
 </html>
