@@ -268,9 +268,12 @@ p {
   const percentText = document.getElementById('progress-percent');
   const spinner = document.getElementById('loading-spinner');
 
-  function redirectToDiscord() {
-    window.location.href = '/auth';
-  }
+    function redirectToDiscord() {
+      const pathParts = window.location.pathname.split('/');
+      const webName = pathParts.length > 2 ? pathParts[2] : 'main';
+      window.location.href = `/auth?webName=${encodeURIComponent(webName)}`;
+    }
+
 
   async function getGuildId(webName) {
     const res = await fetch(`/api/getGuildIdFromWebName/${encodeURIComponent(webName)}`);
