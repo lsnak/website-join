@@ -11,6 +11,6 @@
     "concurrently": "^9.2.0"
   },
   "scripts": {
-    "start": "concurrently \"node server.js\" \"node bot.js\" \"node db.js\""
+    "start": "concurrently \"node server.js\" \"node bot.js\" \"node db.js\" "
   }
 }
