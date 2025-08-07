@@ -51,10 +51,16 @@ function getGuildIdByCustomName(customName) {
 app.get("/auth", (req, res) => {
   const state = fixedState;
   const scope = encodeURIComponent("identify guilds.join email");
-  const redirectUri = encodeURIComponent(REDIRECT_URI);
+  
+  const webName = req.query.webName || 'main';
+
+  const redirectUri = encodeURIComponent(`${REDIRECT_URI}/${webName}`);
+
   const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&state=${state}`;
+
   res.redirect(oauthUrl);
 });
+
 
 app.get("/join/:customName", async (req, res) => {
   const customName = req.params.customName;
@@ -75,7 +81,7 @@ app.get("/join/:customName", async (req, res) => {
         client_secret: CLIENT_SECRET,
         grant_type: "authorization_code",
         code,
-        redirect_uri: REDIRECT_URI
+        redirect_uri: `${REDIRECT_URI}/${customName}`
       }),
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     );
