@@ -3,7 +3,7 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const path = require("path");
-const sqlite3 = require("sqlite3").verbose();
+const { MongoClient } = require("mongodb");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,7 +12,8 @@ const {
   CLIENT_ID,
   CLIENT_SECRET,
   BOT_TOKEN,
-  REDIRECT_URI
+  REDIRECT_URI,
+  MONGODB_URI
 } = process.env;
 
 app.use(cors({
@@ -23,44 +24,33 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-const fixedState = "336481137472";
+const fixedState = "336481137472996";
 
-const db = new sqlite3.Database('./settings.db', (err) => {
-  if (err) {
-    console.error("DB 연결 실패:", err.message);
-    process.exit(1);
-  }
-  console.log("SQLite DB connected.");
-});
+const client = new MongoClient(MONGODB_URI);
+let cachedDb = null;
 
-db.run(`CREATE TABLE IF NOT EXISTS settings (
-  customName TEXT PRIMARY KEY,
-  guildId TEXT NOT NULL
-)`);
+async function connectDB() {
+  if (cachedDb) return cachedDb;
+  await client.connect();
+  cachedDb = client.db('qvarestoremain');
+  return cachedDb;
+}
 
-function getGuildIdByCustomName(customName) {
-  return new Promise((resolve, reject) => {
-    db.get("SELECT guildId FROM settings WHERE customName = ?", [customName], (err, row) => {
-      if (err) return reject(err);
-      if (!row) return resolve(null);
-      resolve(row.guildId);
-    });
-  });
+async function getGuildIdByCustomName(customName) {
+  const db = await connectDB();
+  const data = await db.collection('settings').findOne({ customName });
+  if (!data) return null;
+  return data.guildId;
 }
 
 app.get("/auth", (req, res) => {
   const state = fixedState;
   const scope = encodeURIComponent("identify guilds.join email");
-  
   const webName = req.query.webName || 'main';
-
   const redirectUri = encodeURIComponent(`${REDIRECT_URI}/${webName}`);
-
   const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&state=${state}`;
-
   res.redirect(oauthUrl);
 });
-
 
 app.get("/join/:customName", async (req, res) => {
   const customName = req.params.customName;
