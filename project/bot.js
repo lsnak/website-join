@@ -1,7 +1,9 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
-const { Client, GatewayIntentBits, Collection, EmbedBuilder } = require('discord.js');
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
+
+console.log("BOT_TOKEN:", process.env.BOT_TOKEN ? "존재함" : "없음");
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds]
@@ -13,11 +15,15 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 
 for (const file of commandFiles) {
   const command = require(path.join(commandsPath, file));
-  client.commands.set(command.data.name, command);
+  if (command.data && command.data.name) {
+    client.commands.set(command.data.name, command);
+  } else {
+    console.warn(`명령어 파일 ${file}에 data.name이 없습니다.`);
+  }
 }
 
 client.once('ready', () => {
-  console.log(`${client.user.tag}`);
+  console.log(`Logged in as ${client.user.tag}`);
 });
 
 client.on('interactionCreate', async interaction => {
