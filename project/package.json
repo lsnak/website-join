@@ -5,8 +5,7 @@
     "discord.js": "^14.21.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "mongodb": "^6.18.0",
-    "sqlite3": "^5.1.7"
+    "mongodb": "^6.18.0"
   },
   "devDependencies": {
     "concurrently": "^9.2.0"
