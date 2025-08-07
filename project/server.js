@@ -43,6 +43,21 @@ async function getGuildIdByCustomName(customName) {
   return data.guildId;
 }
 
+app.get("/api/getGuildIdFromWebName/:customName", async (req, res) => {
+  const customName = req.params.customName;
+
+  try {
+    const guildId = await getGuildIdByCustomName(customName);
+    if (!guildId) {
+      return res.status(404).json({ error: "Guild ID not found for that customName" });
+    }
+    res.json({ guildId });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.get("/auth", (req, res) => {
   const state = fixedState;
   const scope = encodeURIComponent("identify guilds.join email");
